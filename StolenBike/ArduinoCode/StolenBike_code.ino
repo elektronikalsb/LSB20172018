@@ -99,7 +99,7 @@ int8_t ATSIM(char* ATcommand, char* expected_answer, unsigned int timeout){
 //FUNCION CONECTAR SIM900
 void conectar()  {
   if (ATSIM("AT","OK",2000) == 1)  {                        //Comprueba que esté encendida la SIM. AT - OK.
-      ATSIM("AT+CPIN=3588","OK",3588);                      //Si está encendido el módulo, introduce el pin. 
+      ATSIM("AT+CPIN=XXXX","OK",XXXX);                      //Si está encendido el módulo, introduce el pin. 
       if(ATSIM("AT+CREG?","+CREG: 0,0",5000) == 0)  {       //Comprueba si tiene cobertura.
         BT1.println(F("Conectado a la red"));
         delay(1000);
@@ -117,15 +117,15 @@ void conectar()  {
   }
   
   //Establece un número de teléfono 
-  mynumber[0]='6';
-  mynumber[1]='2';
-  mynumber[2]='8';
-  mynumber[3]='8';
-  mynumber[4]='7';
-  mynumber[5]='9';
-  mynumber[6]='1';
-  mynumber[7]='1';
-  mynumber[8]='6';
+  mynumber[0]='X';
+  mynumber[1]='X';
+  mynumber[2]='X';
+  mynumber[3]='X';
+  mynumber[4]='X';
+  mynumber[5]='X';
+  mynumber[6]='X';
+  mynumber[7]='X';
+  mynumber[8]='X';
   delay(50);
 } 
 
@@ -133,7 +133,7 @@ void conectar()  {
 //FUNCIÓN PARA MANDAR SMS
 void SMScoordenadas()  {
   if(ATSIM("AT+CMGF=1","OK",3000) == 1)  {                    //Establece el modo SMS del módulo SIM900. 
-    if (ATSIM("AT+CMGS=\"628879116\"",">",2000) == 1) {       //Introduce el número de teléfono al que queremos enviar el SMS. 
+    if (ATSIM("AT+CMGS=\"XXXXXXXXX\"",">",2000) == 1) {       //Introduce el número de teléfono al que queremos enviar el SMS. 
       coordenadas();                                          //Llamamos a la función 'coordenadas' y mandamos un SMS estructurado con el enlace a google maps. 
       Serial.print(F("https://maps.google.com/?q="));
       Serial.print(Latitud,5);
@@ -148,7 +148,7 @@ void SMScoordenadas()  {
 
 void SMSacelerometro()  {
   if(ATSIM("AT+CMGF=1","OK",3000) == 1)  {                    //Establece el modo SMS del módulo SIM900. 
-    if (ATSIM("AT+CMGS=\"628879116\"",">",2000) == 1) {       //Introduce el número de teléfono al que queremos enviar el SMS. 
+    if (ATSIM("AT+CMGS=\"XXXXXXXXX\"",">",2000) == 1) {       //Introduce el número de teléfono al que queremos enviar el SMS. 
       Serial.print(F("La bici ha recibido una sacudida."));
       Serial.write(0x1A);
     }
